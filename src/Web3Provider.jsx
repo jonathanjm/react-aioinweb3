@@ -101,15 +101,15 @@ class Web3Provider extends React.Component {
     const ethAccounts = this.getAccounts();
 
     if (isEmpty(ethAccounts)) {
-      aionweb3 && aionweb3.eth && aionweb3.eth.getAccounts((err, accounts) => {
-        if (err) {
-          this.setState({
-            accountsError: err
-          });
-        } else {
-          this.handleAccounts(accounts);
-        }
-      });
+        aionweb3 && aionweb3.eth && aionweb3.getAccounts.then((accounts) {
+
+              _this2.handleAccounts(accounts);
+
+        }).catch((e) =>{
+            _this2.setState({
+              accountsError: err
+            });
+        });
     } else {
       this.handleAccounts(ethAccounts);
     }
