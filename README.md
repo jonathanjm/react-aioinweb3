@@ -1,6 +1,7 @@
 # React Web3
 
-![demo](https://d3vv6lp55qjaqc.cloudfront.net/items/0x0U0Y2G3W3L3R203l2X/Screen%20Recording%202017-07-30%20at%2005.07%20AM.gif?X-CloudApp-Visitor-Id=1754851&v=759f0b27)
+
+This is a fork of https://github.com/coopermaruyama/react-web3 to make it work with Aiwa(Aion's browser plugin/wallet)
 
 Ensure web3 is available before your app loads.
 
@@ -21,10 +22,8 @@ Along with the above, `<Web3Provider />` also:
 ## Installation
 
 ```
-$ npm install react-web3
+$ npm install react-aionweb3
 
-# web3 1.0 support (beta)
-$ npm install react-web3@beta
 ```
 
 ## Test
@@ -38,7 +37,7 @@ $ npm test
 Wrap your root-level react component:
 
 ```js
-import { Web3Provider } from 'react-web3';
+import { Web3Provider } from 'react-aionweb3';
 
 // ...
 
@@ -59,13 +58,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function SomeComponent(props, context) {
-  const web3Context = context.web3;
+  const web3Context = context.aionweb3;
 
   /**
    * web3Context = {
    *   accounts: {Array<string>} - All accounts
    *   selectedAccount: {string} - Default ETH account address (coinbase)
-   *   network: {string} - One of 'MAINNET', 'ROPSTEN', or 'UNKNOWN'
+   *   network: {string} - One of 'MAINNET', 'MASTERY', or 'UNKNOWN'
    *   networkId: {string} - The network ID (e.g. '1' for main net)
    * }
    */
@@ -111,7 +110,7 @@ export default SomeComponent;
         <div>
           {methods.filter(
             // filter out the 'Ether' option if no account is available
-            method => method !== 'Ether' || !!context.web3.selectedAccount
+            method => method !== 'Ether' || !!context.aionweb3.selectedAccount
           ).map(
             method => <PaymentMethod method={method} key={method} />
           )}
