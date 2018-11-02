@@ -17,7 +17,7 @@ const defaultProps = {
   accountUnavailableScreen: AccountUnavailable
 };
 const childContextTypes = {
-  web3: PropTypes.shape({
+  aionweb3: PropTypes.shape({
     accounts: PropTypes.array,
     selectedAccount: PropTypes.string,
     network: PropTypes.string,
@@ -52,7 +52,7 @@ class Web3Provider extends React.Component {
 
   getChildContext() {
     return {
-      web3: {
+      aionweb3: {
         accounts: this.state.accounts,
         selectedAccount: this.state.accounts && this.state.accounts[0],
         network: getNetwork(this.state.networkId),
@@ -97,11 +97,11 @@ class Web3Provider extends React.Component {
    * @return {void}
    */
   fetchAccounts() {
-    const { web3 } = window;
+    const { aionweb3 } = window;
     const ethAccounts = this.getAccounts();
 
     if (isEmpty(ethAccounts)) {
-      web3 && web3.eth && web3.eth.getAccounts((err, accounts) => {
+      aionweb3 && aionweb3.eth && aionweb3.eth.getAccounts((err, accounts) => {
         if (err) {
           this.setState({
             accountsError: err
@@ -149,12 +149,12 @@ class Web3Provider extends React.Component {
 
       if (didDefine || (isConstructor && next)) {
         store.dispatch({
-          type: 'web3/RECEIVE_ACCOUNT',
+          type: 'aionweb3/RECEIVE_ACCOUNT',
           address: next
         });
       } else if (didChange) {
         store.dispatch({
-          type: 'web3/CHANGE_ACCOUNT',
+          type: 'aionweb3/CHANGE_ACCOUNT',
           address: next
         })
       }
@@ -166,9 +166,9 @@ class Web3Provider extends React.Component {
    * @return {void}
    */
   fetchNetwork() {
-    const { web3 } = window;
+    const { aionweb3 } = window;
 
-    web3 && web3.version && web3.version.getNetwork((err, netId) => {
+    aionweb3 && aionweb3.version && aionweb3.version.getNetwork((err, netId) => {
       if (err) {
         this.setState({
           networkError: err
@@ -191,9 +191,9 @@ class Web3Provider extends React.Component {
    */
   getAccounts() {
     try {
-      const { web3 } = window;
+      const { aionweb3 } = window;
       // throws if no account selected
-      const accounts = web3.eth.accounts;
+      const accounts = aionweb3.eth.accounts;
 
       return accounts;
     } catch (e) {
@@ -202,7 +202,7 @@ class Web3Provider extends React.Component {
   }
 
   render() {
-    const { web3 } = window;
+    const { aionweb3 } = window;
     const {
       passive,
       web3UnavailableScreen: Web3UnavailableComponent,
@@ -213,7 +213,7 @@ class Web3Provider extends React.Component {
       return this.props.children;
     }
 
-    if (!web3) {
+    if (!aionweb3) {
       return <Web3UnavailableComponent />;
     }
 
@@ -236,16 +236,10 @@ module.exports = Web3Provider;
 ============================================================================= */
 function getNetwork(networkId) {
   switch (networkId) {
-    case '1':
+    case '256':
       return 'MAINNET';
-    case '2':
-      return 'MORDEN';
-    case '3':
-      return 'ROPSTEN';
-    case '4':
-      return 'RINKEBY';
-    case '42':
-      return 'KOVAN';
+    case '32':
+      return 'MASTERY';
     default:
       return 'UNKNOWN';
   }
