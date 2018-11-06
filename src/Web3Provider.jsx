@@ -122,7 +122,8 @@ class Web3Provider extends React.Component {
     let curr = this.state.accounts[0];
     next = next && next.toLowerCase();
     curr = curr && curr.toLowerCase();
-    const didChange = curr && next && (curr !== next);
+    /*const didChange = curr && next && (curr !== next);*/
+    const didChange = next && (curr !== next);
 
     if (isEmpty(this.state.accounts) && !isEmpty(accounts)) {
       this.setState({
