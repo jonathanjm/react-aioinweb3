@@ -5,8 +5,8 @@ const Web3Unavailable = ErrorTemplate.bind(null, {
   title: 'Aionweb3 Not Found',
   message: `
 It seems that you are using a browser without Web3 capabilities.
-If you are using Aiwa, make sure that it is
-enabled.
+Please install Aiwa and make sure it's enabled.
+<a href='https://getaiwa.com/#download' target='_blank'>Click here to download Aiwa</a>
 `
 });
 
