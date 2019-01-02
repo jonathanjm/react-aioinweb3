@@ -9,7 +9,8 @@ const ONE_MINUTE = ONE_SECOND * 60;
 const propTypes = {
   web3UnavailableScreen: PropTypes.any,
   accountUnavailableScreen: PropTypes.any,
-  onChangeAccount: PropTypes.func
+  onChangeAccount: PropTypes.func,
+  onChangeNetwork: PropTypes.func
 };
 const defaultProps = {
   passive: false,
@@ -88,7 +89,7 @@ class Web3Provider extends React.Component {
    */
   initNetworkPoll() {
     if (!this.networkInterval) {
-      this.networkInterval = setInterval(this.fetchNetwork, ONE_MINUTE);
+      this.networkInterval = setInterval(this.fetchNetwork, ONE_SECOND);
     }
   }
 
@@ -168,6 +169,7 @@ class Web3Provider extends React.Component {
    */
   fetchNetwork() {
     const { aionweb3 } = window;
+    const { onChangeNetwork } = this.props;
 
     aionweb3 && aionweb3.version && aionweb3.version.getNetwork((err, netId) => {
       if (err) {
@@ -176,6 +178,10 @@ class Web3Provider extends React.Component {
         });
       } else {
         if (netId != this.state.networkId) {
+
+          if(typeof onChangeNetwork === 'function') {
+              onChangeNetwork(netId);
+          }
           this.setState({
             networkError: null,
             networkId: netId
