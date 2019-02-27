@@ -8,9 +8,11 @@ function ErrorTemplate(props) {
       <style dangerouslySetInnerHTML={{ __html: stylesheet }}
       />
       <div className="Web3Provider-wrapper">
+      {/*
         <div className="Web3Provider-image">
           <IconNoWeb3 />
         </div>
+    */}
         <h1
           className="Web3Provider-title"
           dangerouslySetInnerHTML={{ __html: props.title }}
