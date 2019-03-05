@@ -2,11 +2,10 @@ const React = require('react');
 const ErrorTemplate = require('./ErrorTemplate');
 
 const Web3Unavailable = ErrorTemplate.bind(null, {
-  title: 'Aion wallet Not Found',
+  title: 'Connecting to AIWA...',
   message: `
-It seems that you don&apos;t have Aiwa installed.
-Please install Aiwa and make sure it's enabled.
-<a href='https://getaiwa.com/#download' target='_blank'>Click here to download Aiwa</a>
+If you have AIWA installed and activated, this page will be reloaded in a few
+minutes. If you don’t, <a href='https://getaiwa.com/#download' target='_blank'>click here to install AIWA</a>
 `
 });
 
