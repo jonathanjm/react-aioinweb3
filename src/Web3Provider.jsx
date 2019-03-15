@@ -70,7 +70,7 @@ class Web3Provider extends React.Component {
     this.fetchAccounts();
     this.fetchNetwork();
     this.initPoll();
-    this.initNetworkPoll();
+    //this.initNetworkPoll();
   }
 
   /**
